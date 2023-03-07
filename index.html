@@ -18,17 +18,29 @@
     <script type="text/babel">
         const Title = () => <h1>The Title</h1>
 
+
         const Post = (props) =>{
+            
+            const [showContent, setShowContent] = React.useState(false)
+
+            const showMoreContent = () => {
+                setShowContent(true)
+            }
+            const showLessContent = () => setShowContent(false)
+        
             return(
                 <div>
                     <h2>{props.title}</h2>
                     {
-                        props.showContent ? (
+                        showContent ? (
+                            <>
                             <p>{props.content}</p>
+                            <button onClick={showLessContent}>Show less</button>
+                            </>
                         ) : (
                         <>
                             <p>{props.shortContent}</p>
-                            <button>read more</button>
+                            <button onClick={showMoreContent}>Read more</button>
                         </>)
                     }
                     
@@ -39,29 +51,24 @@
     
         const Blog = function(){
             const posts = [
-            {
-                id:1,
-                title: "blog post 1",
-                shortContent: "paragraph..",
-                content: "lorem ipsum",
-                showContent: true
-            },
-            {
-                id:2,
-                title: "blog post 2",
-                shortContent: "shrot content 2",
-                content: "lorem ipsum",
-                showContent: false
-            }
+                {
+                    id:1,
+                    title: "blog post 1",
+                    shortContent: "paragraph..",
+                    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque ligula, sollicitudin quis leo sed, imperdiet tempus nibh. Curabitur sed leo quis ante pretium viverra.",
+                },
+                {
+                    id:2,
+                    title: "blog post 2",
+                    shortContent: "shrot content 2",
+                    content: "lorem ipsum",
+                }
             ]
 
         const postsList = posts.map(el => (
                     <Post 
                     key={el.id}
-                    title={el.title}
-                    shortContent={el.shortContent}
-                    content={el.content}
-                    showContent={el.showContent}
+                    {...el}
                     />
                 ))
         return(
