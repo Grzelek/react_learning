@@ -22,8 +22,16 @@
             return(
                 <div>
                     <h2>{props.title}</h2>
-                    <p>{props.shortContent}</p>
-                    <button>read more</button>
+                    {
+                        props.showContent ? (
+                            <p>{props.content}</p>
+                        ) : (
+                        <>
+                            <p>{props.shortContent}</p>
+                            <button>read more</button>
+                        </>)
+                    }
+                    
                     <hr/>
                 </div>
             )
@@ -32,32 +40,52 @@
         const Blog = function(){
             const posts = [
             {
+                id:1,
                 title: "blog post 1",
-                shortContent: "paragraph.."
+                shortContent: "paragraph..",
+                content: "lorem ipsum",
+                showContent: true
             },
             {
+                id:2,
                 title: "blog post 2",
-                shortContent: "shrot content 2"
+                shortContent: "shrot content 2",
+                content: "lorem ipsum",
+                showContent: false
             }
             ]
-            return(
-                <div>
-                    <Title />
-                    <p>this is blog posts list</p>
-                    {posts.map(el => (
-                        <Post 
-                        title={el.title}
-                        shortContent={el.shortContent}
-                        />
-                    ))}
-                </div>
-            )
+
+        const postsList = posts.map(el => (
+                    <Post 
+                    key={el.id}
+                    title={el.title}
+                    shortContent={el.shortContent}
+                    content={el.content}
+                    showContent={el.showContent}
+                    />
+                ))
+        return(
+            <div>
+                <Title />
+                <p>this is blog posts list</p>
+                {postsList}
+            </div>
+        )
         }
 
-        ReactDOM.render(
-            <Blog />,
-            document.getElementById('root')
-        );
+/*  
+old v17  
+ReactDOM.render(
+    <Blog />,
+    document.getElementById('root')
+);   
+new v18
+const container = document.getElementById('root');
+const root = ReactDOM.createRoot(container);
+root.render(<Blog />);
+*/
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Blog />)
     </script>
 </body>
 </html>
