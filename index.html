@@ -17,30 +17,52 @@
     <script type="text/babel">
         const Title = () => <h1>The Title</h1>
 
-        const Post = (props) => {
-            const [showContent, setShowContent] = React.useState(false)
-            
-            const showMoreContent = () => setShowContent(true)
-            const showLessContent = () => setShowContent(false)
+        class PostTitle extends React.Component{
+            constructor(props){
+                super(props)
+                
+            }
+            render(){
+                return <h2>{this.props.value}</h2>
+            }
+        }
+ 
 
-            return (
-                <div>
-                    <h2>{props.title}</h2>
-                    {
-                        showContent ? (
-                            <>
-                                <p>{props.content}</p>
-                                <button onClick={showLessContent}>Show less</button>
-                            </>
-                        ) : (
-                            <>
-                                <p>{props.shortContent}</p>
-                                <button onClick={showMoreContent}>Read more</button>
-                            </>)
-                    }
-                    <hr />
-                </div>
-            )
+        class Post extends React.Component{
+            constructor(props){
+                super(props)
+                this.state = {
+                    setShowContent:false
+                }
+            }
+            showMoreContent(){ 
+                //setShowContent(true)
+                this.setState({showContent: true});
+            }
+            showLessContent = () => {
+                //setShowContent(false)
+                this.setState({showContent: false});
+            }
+            render(){
+                return (
+                    <div>
+                        <PostTitle value={this.props.title}/>
+                        {
+                            this.state.showContent ? (
+                                <>
+                                    <p>{this.props.content}</p>
+                                    <button onClick={this.showLessContent.bind(this)}>Show less</button>
+                                </>
+                            ) : (
+                                <>
+                                    <p>{this.props.shortContent}</p>
+                                    <button onClick={() => this.showMoreContent()}>Read more</button>
+                                </>)
+                        }
+                        <hr />
+                    </div>
+                )
+            }
         }
 
         const Blog = function () {
