@@ -72,7 +72,7 @@ var Post = function (_React$Component2) {
                 null,
                 React.createElement(PostTitle, { value: this.props.title }),
                 this.state.showContent ? React.createElement(
-                    "div",
+                    React.Fragment,
                     null,
                     React.createElement(
                         "p",
@@ -85,7 +85,7 @@ var Post = function (_React$Component2) {
                         "Show less"
                     )
                 ) : React.createElement(
-                    "div",
+                    React.Fragment,
                     null,
                     React.createElement(
                         "p",

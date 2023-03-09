@@ -32,15 +32,15 @@ class Post extends React.Component{
                 <PostTitle value={this.props.title}/>
                 {
                     this.state.showContent ? (
-                        <div>
+                        <React.Fragment>
                             <p>{this.props.content}</p>
                             <button onClick={this.showLessContent.bind(this)}>Show less</button>
-                        </div>
+                        </React.Fragment>
                     ) : (
-                        <div>
+                        <React.Fragment>
                             <p>{this.props.shortContent}</p>
                             <button onClick={() => this.showMoreContent()}>Read more</button>
-                        </div>)
+                        </React.Fragment>)
                 }
                 <hr />
             </div>
