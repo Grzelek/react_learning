@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "instal": "npm install babel-cli@6 babel-preset-react-app@3",
     "watch": "npx babel --watch src --out-dir dist --presets react-app/prod"
   },
   "author": "",
